@@ -19,7 +19,7 @@ const channelLabels: Record<string, string> = {
 
 export default function TeamPage() {
   const [members, setMembers] = useState<TeamMember[]>([])
-  const [properties, setProperties] = useState<Property[]>([])
+  const [properties, setProperties] = useState<Pick<Property, 'id' | 'name'>[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState<TeamMember | null>(null)
@@ -109,7 +109,7 @@ export default function TeamPage() {
     load()
   }
 
-  const propertyMap = Object.fromEntries(properties.map((p) => [p.id, p]))
+  const propertyMap = Object.fromEntries(properties.map((p) => [p.id, p])) as Record<string, Pick<Property, 'id' | 'name'>>
 
   return (
     <div className="space-y-8">
